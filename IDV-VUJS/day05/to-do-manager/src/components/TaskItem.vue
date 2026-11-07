@@ -22,10 +22,9 @@
         emit('update', task.id, { title })
     }
 
-    function handleStatusChange(event: Event) {
+    function handleStatusChange(id: number, event: Event) {
         const select = event.target as HTMLSelectElement
-
-        emit('update', task.id, { status: select.value as Status })
+        emit('update', id, { status: select.value as Status })
     }
 
 </script>
@@ -44,7 +43,7 @@
       <select
         :id="`status-${task.id}`"
         :value="task.status"
-        @change="handleStatusChange"
+        @change="handleStatusChange(task.id, $event)"
       >
         <option :value="Status.Todo">À faire</option>
         <option :value="Status.InProgress">En cours</option>
